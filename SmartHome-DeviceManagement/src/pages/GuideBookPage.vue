@@ -2,16 +2,19 @@
   <div class="guide-page">
     <h1>Guide Book</h1>
     <UINavBar> </UINavBar>
-    <!-- Add your content here -->
+    <UIFooter></UIFooter>
   </div>
 </template>
 
 <script>
 import UINavBar from '../components/UINavBar.vue'
+import UIFooter from '../components/UIFooter.vue'
+
 export default {
   name: 'GuideBook',
   components: {
-    UINavBar
+    UINavBar,
+    UIFooter
   }
 }
 </script>
