@@ -5,10 +5,12 @@ import GuideBookPage from '../pages/GuideBookPage.vue'
 
 import HomesPage from '../pages/HomesPage.vue'
 import RoomPage from '../pages/RoomPage.vue'
-import DevicePage from '../pages/DevicePage.vue'
+// import DevicePage from '../pages/DevicePage.vue'
 
-import BulbPage from '../pages/BulbPage.vue'
-import DoorWindowPage from '../pages/DoorWindowPage.vue'
+// import BulbPage from '../pages/BulbPage.vue'
+// import DoorWindowPage from '../pages/DoorWindowPage.vue'
+
+import ProfilePage from '../pages/ProfilePage.vue'
 
 const router = createRouter({
   history: createWebHistory(),
@@ -42,19 +44,9 @@ const router = createRouter({
       component: RoomPage
     },
     {
-      path: '/homes/:id/device',
-      name: 'device',
-      component: DevicePage
-    },
-    {
-      path: '/homes/:id/device/bulb',
-      name: 'bulb',
-      component: BulbPage
-    },
-    {
-      path: '/homes/:id/device/doorwindow',
-      name: 'doorwindow',
-      component: DoorWindowPage
+      path: '/profile',
+      name: 'profile',
+      component: ProfilePage
     }
   ]
 })

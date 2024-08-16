@@ -1,18 +1,18 @@
 <template>
   <div>
-    <h1>About Page</h1>
+    <h1>Welcome to the Profile Page</h1>
     <UINavBar> </UINavBar>
   </div>
 </template>
 
-<script>
+<script lang="ts">
 import UINavBar from '../components/UINavBar.vue'
 export default {
+  name: 'ProfilePage',
   components: {
     UINavBar
-  },
-  name: 'AboutPage'
+  }
 }
 </script>
 
-<style scoped></style>
+<style lang="scss" scoped></style>
