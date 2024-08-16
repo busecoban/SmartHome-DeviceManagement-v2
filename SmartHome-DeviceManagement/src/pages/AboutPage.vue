@@ -5,14 +5,18 @@
       <h1>About Page</h1>
       <p>This is the about page of the application.</p>
     </div>
+    <UIFooter></UIFooter>
   </div>
 </template>
 
 <script>
 import UINavBar from '../components/UINavBar.vue'
+import UIFooter from '../components/UIFooter.vue'
+
 export default {
   components: {
-    UINavBar
+    UINavBar,
+    UIFooter
   },
   name: 'AboutPage'
 }
