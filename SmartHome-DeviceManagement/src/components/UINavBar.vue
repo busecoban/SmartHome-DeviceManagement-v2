@@ -3,7 +3,7 @@
     <div class="ui-navbar">
       <div class="ui-navbar-logo">
         <slot name="logo">
-          <IconSvg name="home" :size="l" />
+          <IconSvg name="home" :size="'l'" />
         </slot>
       </div>
 
@@ -55,6 +55,12 @@ export default {
 
 <style lang="scss" scoped>
 .ui-navbar-c {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+
   display: flex;
   justify-content: space-between;
   align-items: center;

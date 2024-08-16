@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="home-page">
     <h1>Welcome to the Profile Page</h1>
     <UINavBar> </UINavBar>
   </div>
@@ -15,4 +15,8 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.home-page {
+  padding-top: 3rem;
+}
+</style>
