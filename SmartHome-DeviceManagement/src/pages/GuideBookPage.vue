@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="guide-page">
     <h1>Guide Book</h1>
     <UINavBar> </UINavBar>
     <!-- Add your content here -->
@@ -13,10 +13,11 @@ export default {
   components: {
     UINavBar
   }
-  // Add your script logic here
 }
 </script>
 
 <style scoped>
-/* Add your component styles here */
+.guide-page {
+  padding-top: 3rem;
+}
 </style>

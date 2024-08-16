@@ -1,7 +1,7 @@
 <template>
-  <div>
-    <h1>Welcome to the Home Page</h1>
+  <div class="home-view">
     <UINavBar> </UINavBar>
+    <h1>Welcome to the Home Page</h1>
   </div>
 </template>
 
@@ -12,20 +12,17 @@ export default {
   components: {
     UINavBar
   },
-  // Your component's logic goes here
 
-  // Add your component's logic here
-  created() {
-    // Logic to be executed when the component is created
-  },
+  created() {},
 
   methods: {
-    // Define your component's methods here
-    handleClick() {
-      // Handle the click event
-    }
+    handleClick() {}
   }
 }
 </script>
 
-<style scoped></style>
+<style lang="scss" scoped>
+.home-view {
+  padding-top: 3rem;
+}
+</style>

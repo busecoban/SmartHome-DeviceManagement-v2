@@ -1,7 +1,10 @@
 <template>
-  <div>
-    <h1>About Page</h1>
+  <div class="about-page">
     <UINavBar> </UINavBar>
+    <div>
+      <h1>About Page</h1>
+      <p>This is the about page of the application.</p>
+    </div>
   </div>
 </template>
 
@@ -15,4 +18,8 @@ export default {
 }
 </script>
 
-<style scoped></style>
+<style scoped>
+.about-page {
+  padding-top: 3rem;
+}
+</style>
