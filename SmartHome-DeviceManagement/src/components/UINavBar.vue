@@ -1,8 +1,10 @@
 <template>
-  <div class="ui-navbar-c">
-    <div class="['ui-navbar',navbarClass]">
+  <div :class="['ui-navbar-c', navbarClass]">
+    <div class="ui-navbar">
       <div class="ui-navbar-logo">
-        <slot name="logo"> </slot>
+        <slot name="logo">
+          <IconSvg name="home" :size="l" />
+        </slot>
       </div>
 
       <div class="ui-navbar-links">
@@ -18,8 +20,13 @@
 </template>
 
 <script lang="ts">
+import IconSvg from '../components/IconSvg.vue'
+
 export default {
   name: 'UINavBar',
+  components: {
+    IconSvg
+  },
   props: {
     theme: {
       type: String,
@@ -30,13 +37,11 @@ export default {
   computed: {
     navbarClass() {
       return {
-        'ui-navbar-c': true,
         'ui-navbar-c--light': this.theme === 'light',
         'ui-navbar-c--dark': this.theme === 'dark'
       }
     }
   },
-  data() {},
   methods: {
     handleThemeChange(theme) {
       this.$emit('themeChange', theme)
@@ -48,4 +53,44 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.ui-navbar-c {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+
+  &--light {
+    background-color: #f9f9f9;
+    color: #333;
+  }
+
+  &--dark {
+    background-color: #333;
+    color: #f9f9f9;
+  }
+
+  .ui-navbar {
+    display: flex;
+    align-items: center;
+  }
+
+  .ui-navbar-logo {
+    margin-right: 2rem;
+  }
+
+  .ui-navbar-links {
+    display: flex;
+    gap: 1rem;
+
+    a {
+      text-decoration: none;
+      color: inherit;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+}
+</style>
