@@ -5,6 +5,7 @@ import GuideBookPage from '../pages/GuideBookPage.vue'
 
 import HomesPage from '../pages/HomesPage.vue'
 import RoomPage from '../pages/RoomPage.vue'
+import ContactUsPage from '../pages/ContactUsPage.vue'
 // import DevicePage from '../pages/DevicePage.vue'
 
 // import BulbPage from '../pages/BulbPage.vue'
@@ -47,6 +48,11 @@ const router = createRouter({
       path: '/profile',
       name: 'profile',
       component: ProfilePage
+    },
+    {
+      path: '/contactus',
+      name: 'contactus',
+      component: ContactUsPage
     }
   ]
 })

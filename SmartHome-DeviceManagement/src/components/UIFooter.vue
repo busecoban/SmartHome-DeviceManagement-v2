@@ -3,7 +3,7 @@
     <div class="ui-footer">
       <div class="ui-footer-links">
         <slot name="links">
-          <span><a href="/">Contact Us</a></span>
+          <span><a href="/contactus">Contact Us</a></span>
         </slot>
       </div>
     </div>
