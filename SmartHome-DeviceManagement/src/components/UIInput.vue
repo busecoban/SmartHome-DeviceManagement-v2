@@ -1,23 +1,21 @@
 <template>
   <div class="ui-input-c">
-    <label v-if="label" :for="id" class="ui-input-label">{{ label }}</label>
     <input
       :type="type"
       :id="id"
-      :placeholder="placeholder"
       :value="modelValue"
-      :disabled="disabled"
-      :class="['ui-input', inputSize]"
+      :class="['input', inputSize]"
       @input="onInput"
-      @blur="validate"
+      @focus="isFocused = true"
+      @blur="onBlur"
+      required
     />
+    <label :for="id" class="user-label">{{ label }}</label>
     <p v-if="errorMessage" class="ui-input-error">{{ errorMessage }}</p>
   </div>
 </template>
 
 <script lang="ts">
-import { validateEmail, validatePassword } from '@/validators/validatorHelper.js'
-
 export default {
   name: 'UIInput',
   props: {
@@ -29,17 +27,9 @@ export default {
       type: String,
       required: true
     },
-    placeholder: {
-      type: String,
-      default: ''
-    },
     modelValue: {
       type: String,
       default: ''
-    },
-    disabled: {
-      type: Boolean,
-      default: false
     },
     label: {
       type: String,
@@ -55,6 +45,11 @@ export default {
       validator: (value) => ['small', 'medium', 'large'].includes(String(value))
     }
   },
+  data() {
+    return {
+      isFocused: false
+    }
+  },
   computed: {
     inputSize() {
       return `ui-input--${this.size}`
@@ -66,19 +61,8 @@ export default {
         this.$emit('update:modelValue', (event.target as HTMLInputElement).value)
       }
     },
-    validate() {
-      let error = ''
-      if (this.type === 'email') {
-        error = validateEmail(this.modelValue)
-      } else if (this.type === 'password') {
-        error = validatePassword(this.modelValue)
-      }
-
-      if (error) {
-        this.$emit('update:errorMessage', error)
-      } else {
-        this.$emit('update:errorMessage', '')
-      }
+    onBlur(event: FocusEvent) {
+      this.isFocused = false
     }
   }
 }
@@ -86,49 +70,61 @@ export default {
 
 <style scoped>
 .ui-input-c {
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 1rem;
+  position: relative;
+  margin-bottom: 0.8rem;
 }
 
-.ui-input-label {
-  margin-bottom: 0.5rem;
-  font-weight: bold;
-}
-
-.ui-input {
-  padding: 0.5rem 1rem;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  transition: border-color 0.3s ease;
-}
-
-.ui-input:focus {
-  border-color: #007bff;
-  outline: none;
+.input {
+  border: solid 1.5px #9e9e9e;
+  border-radius: 1rem;
+  background: none;
+  padding: 1rem;
+  font-size: 1rem;
+  color: black;
+  transition: border 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  width: 100%;
 }
 
 .ui-input--small {
   padding: 0.5rem 1rem;
-  font-size: 1rem;
+  font-size: 0.8rem;
   width: 16rem;
 }
 
 .ui-input--medium {
   padding: 0.5rem 1rem;
-  font-size: 1rem;
-  width: 24rem;
+  font-size: 0.8rem;
+  width: 18rem;
 }
 
 .ui-input--large {
-  padding: 0.75rem 1.5rem;
-  font-size: 1.2rem;
-  width: 32rem;
+  padding: 0.5rem 1rem;
+  font-size: 0.8rem;
+  width: 20rem;
 }
 
-.ui-input-error {
-  color: red;
-  font-size: 0.8rem;
-  margin-top: 0.5rem;
+.input:focus,
+.input:valid {
+  outline: none;
+  border: 1.5px solid #1a73e8;
+}
+
+.user-label {
+  position: absolute;
+  left: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: grey;
+  pointer-events: none;
+  transition: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.input:focus ~ .user-label,
+.input:valid ~ .user-label {
+  top: -0.2rem; /* Label'ın tam olarak yukarı çıkmasını sağlar */
+  transform: translateY(-50%) scale(0.8); /* Yukarı çıkarken küçültür */
+  background: white;
+  padding: 0 0.2rem; /* Label etrafında boşluk bırakır */
+  color: #2196f3;
 }
 </style>
