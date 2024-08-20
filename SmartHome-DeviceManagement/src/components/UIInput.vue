@@ -51,8 +51,8 @@ export default {
     },
     size: {
       type: String,
-      default: 'medium',
-      validator: (value) => ['small', 'medium', 'large'].includes(value)
+      default: 'small',
+      validator: (value) => ['small', 'medium', 'large'].includes(String(value))
     }
   },
   computed: {
@@ -61,8 +61,10 @@ export default {
     }
   },
   methods: {
-    onInput(event) {
-      this.$emit('update:modelValue', event.target.value)
+    onInput(event: InputEvent) {
+      if (event.target) {
+        this.$emit('update:modelValue', (event.target as HTMLInputElement).value)
+      }
     },
     validate() {
       let error = ''
@@ -107,18 +109,21 @@ export default {
 }
 
 .ui-input--small {
-  padding: 0.25rem 0.5rem;
-  font-size: 0.8rem;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  width: 16rem;
 }
 
 .ui-input--medium {
   padding: 0.5rem 1rem;
   font-size: 1rem;
+  width: 24rem;
 }
 
 .ui-input--large {
   padding: 0.75rem 1.5rem;
   font-size: 1.2rem;
+  width: 32rem;
 }
 
 .ui-input-error {

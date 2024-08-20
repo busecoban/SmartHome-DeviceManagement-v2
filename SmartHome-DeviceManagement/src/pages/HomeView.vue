@@ -1,36 +1,43 @@
 <template>
   <div class="home-view">
     <UINavBar> </UINavBar>
-    <h1>Welcome to the Home Page</h1>
     <UIFooter></UIFooter>
-    <UIButton @click="handleClick"> Click Me</UIButton>
+    <h1>Welcome to the Home Page</h1>
+    <h2>Our Components</h2>
+    <h3>Buse Ç.</h3>
+    <UIInput id="4" :size="'small'"> </UIInput>
+    <UIInput id="5" :size="'medium'"> </UIInput>
+    <UIInput id="6" :size="'large'"> </UIInput>
+
     <UIInput
-      id="email"
+      id="1"
       type="email"
-      label="Email"
+      label="Email:"
       placeholder="Enter your email"
       v-model="email"
       :errorMessage="emailError"
     />
 
     <UIInput
-      id="password"
+      id="2"
       type="password"
-      label="Password"
+      label="Password:"
       placeholder="Enter your password"
       v-model="password"
       :errorMessage="passwordError"
     />
 
     <UIInput
-      id="password"
+      id="3"
       type="password"
-      label="Password"
+      label="Password:"
       placeholder="Enter your password"
       v-model="password"
       :errorMessage="passwordError"
       disabled
     />
+
+    <UIButton @click="handleClick"> Click Me</UIButton>
   </div>
 </template>
 
