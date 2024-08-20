@@ -3,6 +3,8 @@
     <div class="ui-footer">
       <div class="ui-footer-links">
         <slot name="links">
+          <span><a href="/componentguidefordeveloper">Developer Guide</a></span>
+
           <span><a href="/contactus">Contact Us</a></span>
           <span><a href="/about">About Us</a></span>
         </slot>
