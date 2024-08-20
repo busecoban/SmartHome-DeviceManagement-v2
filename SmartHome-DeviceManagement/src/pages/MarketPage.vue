@@ -1,7 +1,7 @@
 <template>
-  <div class="contact-us-page">
+  <div class="market-page">
     <UINavBar></UINavBar>
-    <h1>Contact Us Page</h1>
+    <h1>Market Page</h1>
     <UIFooter></UIFooter>
   </div>
 </template>
@@ -9,8 +9,9 @@
 <script lang="ts">
 import UINavBar from '../components/UINavBar.vue'
 import UIFooter from '../components/UIFooter.vue'
+
 export default {
-  name: 'ContactUsPage',
+  name: 'MarketPage',
   components: {
     UINavBar,
     UIFooter
@@ -19,7 +20,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.contact-us-page {
+.market-page {
   padding-top: 3rem;
 }
 </style>
