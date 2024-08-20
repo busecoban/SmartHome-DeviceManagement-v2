@@ -11,12 +11,12 @@ export default {
     type: {
       type: String,
       default: 'primary', // Varsayılan buton tipi
-      validator: (value) => ['primary', 'secondary', 'danger', 'success'].includes(value)
+      validator: (value: string) => ['primary', 'secondary', 'danger', 'success'].includes(value)
     },
     size: {
       type: String,
       default: 'medium', // Varsayılan buton boyutu
-      validator: (value) => ['small', 'medium', 'large'].includes(value)
+      validator: (value: string) => ['small', 'medium', 'large'].includes(value)
     },
     disabled: {
       type: Boolean,
@@ -32,7 +32,7 @@ export default {
     }
   },
   methods: {
-    handleClick(event) {
+    handleClick(event: MouseEvent) {
       if (!this.disabled) {
         this.$emit('click', event)
       }
