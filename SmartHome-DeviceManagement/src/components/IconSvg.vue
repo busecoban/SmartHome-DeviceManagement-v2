@@ -51,18 +51,18 @@ export default {
     height: 28px;
   }
   &.icon-size-l {
-    width: 32px;
-    height: 32px;
+    width: 36px;
+    height: 36px;
+  }
+  &.icon-size-Xl {
+    width: 90px;
+    height: 90px;
   }
 
   img {
     width: 100%; /* Konteyner boyutuna tam uyması için */
     height: 100%; /* Konteyner boyutuna tam uyması için */
     display: block;
-  }
-
-  &:hover {
-    background: #e6e8ec;
   }
 }
 </style>
