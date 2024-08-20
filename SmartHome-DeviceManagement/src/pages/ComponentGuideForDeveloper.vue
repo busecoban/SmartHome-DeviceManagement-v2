@@ -2,21 +2,17 @@
   <div class="home-view">
     <UINavBar> </UINavBar>
     <UIFooter></UIFooter>
-    <div>
-      <h2>Our Components</h2>
+    <div class="header">
+      <h2>Developer Guide</h2>
       <h2>Inputlar s-m-l</h2>
-
-      <h2>.</h2>
     </div>
 
     <UIInput id="1" :size="'small'" label="small input"> </UIInput>
     <UIInput id="2" :size="'medium'" label="medium input"> </UIInput>
     <UIInput id="3" :size="'large'" label="large input"> </UIInput>
 
-    <div>
-      <h2>form için small</h2>
-
-      <h2>.</h2>
+    <div class="header">
+      <h2>formlar için</h2>
     </div>
     <UIInput id="4" type="email" label="Email" v-model="email" :errorMessage="emailError" />
     <UIInput
@@ -26,16 +22,16 @@
       v-model="password"
       :errorMessage="passwordError"
     />
-    <UIInput
-      id="6"
-      type="password"
-      label="disabled"
-      v-model="password"
-      :errorMessage="passwordError"
-      disabled
-    />
+
+    <div class="header">
+      <h2>butonlar</h2>
+    </div>
 
     <UIButton @click="handleClick"> Click Me</UIButton>
+
+    <div class="header">
+      <h2>text box</h2>
+    </div>
   </div>
 </template>
 
@@ -64,5 +60,10 @@ export default {
 .home-view {
   padding-top: 3rem;
   background: white;
+}
+
+.header {
+  padding-bottom: 1rem;
+  padding-top: 1rem;
 }
 </style>
