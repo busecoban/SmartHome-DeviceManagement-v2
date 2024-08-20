@@ -12,7 +12,9 @@ import ContactUsPage from '../pages/ContactUsPage.vue'
 // import DoorWindowPage from '../pages/DoorWindowPage.vue'
 
 import ProfilePage from '../pages/ProfilePage.vue'
-
+import LoadigPage from '../pages/LoadingPage.vue'
+import LoginPage from '../pages/LoginPage.vue'
+import MarketPage from '../pages/MarketPage.vue'
 const router = createRouter({
   history: createWebHistory(),
   routes: [
@@ -20,6 +22,11 @@ const router = createRouter({
       path: '/',
       name: 'HomePage',
       component: HomePage
+    },
+    {
+      path: '/loading',
+      name: 'LoadingPage',
+      component: LoadigPage
     },
     {
       path: '/about',
@@ -53,6 +60,16 @@ const router = createRouter({
       path: '/contactus',
       name: 'contactus',
       component: ContactUsPage
+    },
+    {
+      path: '/login',
+      name: 'login',
+      component: LoginPage
+    },
+    {
+      path: '/market',
+      name: 'market',
+      component: MarketPage
     }
   ]
 })
