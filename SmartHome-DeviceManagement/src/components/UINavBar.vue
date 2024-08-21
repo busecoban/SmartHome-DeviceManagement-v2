@@ -2,17 +2,15 @@
   <div :class="['ui-navbar-c', navbarClass]">
     <div class="ui-navbar">
       <div class="ui-navbar-logo">
-        <slot name="logo">
-          <IconSvg name="home" :size="'l'" />
-        </slot>
+        <IconSvg name="BIMO2" :size="'Xl'" />
       </div>
 
       <div class="ui-navbar-links">
         <slot name="links">
           <span><a href="/">Home</a></span>
-          <span><a href="/about">About</a></span>
+          <span><a href="/market">Market</a></span>
           <span><a href="/guidebook">Guidebook</a></span>
-          <span><a href="/profile">Profile</a></span>
+          <span><a href="/login">Login</a></span>
         </slot>
       </div>
     </div>
@@ -43,8 +41,8 @@ export default {
     }
   },
   methods: {
-    handleThemeChange(theme) {
-      this.$emit('themeChange', theme)
+    handleThemeChange() {
+      this.$emit('themeChange')
     },
     handleLogin() {
       this.$emit('login')
@@ -55,6 +53,7 @@ export default {
 
 <style lang="scss" scoped>
 .ui-navbar-c {
+  height: 4rem;
   position: fixed;
   top: 0;
   left: 0;
@@ -86,6 +85,8 @@ export default {
   }
 
   .ui-navbar-links {
+    position: absolute;
+    right: 2rem;
     display: flex;
     gap: 1rem;
 

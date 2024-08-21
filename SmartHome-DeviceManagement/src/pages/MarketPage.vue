@@ -1,8 +1,8 @@
 <template>
-  <div class="home-view">
-    <UINavBar> </UINavBar>
+  <div class="market-page">
+    <UINavBar></UINavBar>
+    <h1>Market Page</h1>
     <UIFooter></UIFooter>
-    <h1>Welcome to the Home Page</h1>
   </div>
 </template>
 
@@ -11,20 +11,16 @@ import UINavBar from '../components/UINavBar.vue'
 import UIFooter from '../components/UIFooter.vue'
 
 export default {
-  name: 'HomeView',
+  name: 'MarketPage',
   components: {
     UINavBar,
     UIFooter
-  },
-
-  methods: {
-    handleClick() {}
   }
 }
 </script>
 
 <style lang="scss" scoped>
-.home-view {
+.market-page {
   padding-top: 3rem;
 }
 </style>

@@ -5,13 +5,17 @@ import GuideBookPage from '../pages/GuideBookPage.vue'
 
 import HomesPage from '../pages/HomesPage.vue'
 import RoomPage from '../pages/RoomPage.vue'
+import ContactUsPage from '../pages/ContactUsPage.vue'
 // import DevicePage from '../pages/DevicePage.vue'
 
 // import BulbPage from '../pages/BulbPage.vue'
 // import DoorWindowPage from '../pages/DoorWindowPage.vue'
 
 import ProfilePage from '../pages/ProfilePage.vue'
-
+import LoadigPage from '../pages/LoadingPage.vue'
+import LoginPage from '../pages/LoginPage.vue'
+import MarketPage from '../pages/MarketPage.vue'
+import ComponentGuideForDeveloper from '../pages/ComponentGuideForDeveloper.vue'
 const router = createRouter({
   history: createWebHistory(),
   routes: [
@@ -19,6 +23,11 @@ const router = createRouter({
       path: '/',
       name: 'HomePage',
       component: HomePage
+    },
+    {
+      path: '/loading',
+      name: 'LoadingPage',
+      component: LoadigPage
     },
     {
       path: '/about',
@@ -47,6 +56,26 @@ const router = createRouter({
       path: '/profile',
       name: 'profile',
       component: ProfilePage
+    },
+    {
+      path: '/contactus',
+      name: 'contactus',
+      component: ContactUsPage
+    },
+    {
+      path: '/login',
+      name: 'login',
+      component: LoginPage
+    },
+    {
+      path: '/market',
+      name: 'market',
+      component: MarketPage
+    },
+    {
+      path: '/componentguidefordeveloper',
+      name: 'componentguidefordeveloper',
+      component: ComponentGuideForDeveloper
     }
   ]
 })

@@ -1,30 +1,25 @@
 <template>
-  <div class="home-view">
-    <UINavBar> </UINavBar>
+  <div class="Loginpage">
+    <UINavBar></UINavBar>
+    <h1>Login Page</h1>
     <UIFooter></UIFooter>
-    <h1>Welcome to the Home Page</h1>
   </div>
 </template>
 
 <script lang="ts">
 import UINavBar from '../components/UINavBar.vue'
 import UIFooter from '../components/UIFooter.vue'
-
 export default {
-  name: 'HomeView',
+  name: 'LoginPage',
   components: {
     UINavBar,
     UIFooter
-  },
-
-  methods: {
-    handleClick() {}
   }
 }
 </script>
 
 <style lang="scss" scoped>
-.home-view {
+.Loginpage {
   padding-top: 3rem;
 }
 </style>

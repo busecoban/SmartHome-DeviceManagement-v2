@@ -3,7 +3,10 @@
     <div class="ui-footer">
       <div class="ui-footer-links">
         <slot name="links">
-          <span><a href="/">Contact Us</a></span>
+          <span><a href="/componentguidefordeveloper">Developer Guide</a></span>
+
+          <span><a href="/contactus">Contact Us</a></span>
+          <span><a href="/about">About Us</a></span>
         </slot>
       </div>
     </div>
@@ -34,6 +37,8 @@ export default {
 
 <style lang="scss" scoped>
 .ui-footer-c {
+  height: 3rem;
+
   position: fixed;
   bottom: 0;
   left: 0;
@@ -65,6 +70,8 @@ export default {
   }
 
   .ui-footer-links {
+    position: absolute;
+    right: 2rem;
     display: flex;
     gap: 1rem;
 
