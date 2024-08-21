@@ -2,26 +2,22 @@
   <div class="home-view">
     <UINavBar> </UINavBar>
     <UIFooter></UIFooter>
-    <div class="header">
-      <h2>Developer Guide</h2>
-      <h2>Inputlar s-m-l</h2>
-    </div>
 
-    <UIInput id="1" :size="'small'" label="small input"> </UIInput>
-    <UIInput id="2" :size="'medium'" label="medium input"> </UIInput>
-    <UIInput id="3" :size="'large'" label="large input"> </UIInput>
+    <h1>{{ ' Developer Component Guide ' }}</h1>
+    <h3>{{ 'written by Buse Ç.' }}</h3>
+    <h1>{{ ' _ ' }}</h1>
 
-    <div class="header">
-      <h2>formlar için</h2>
-    </div>
-    <UIInput id="4" type="email" label="Email" v-model="email" :errorMessage="emailError" />
-    <UIInput
-      id="5"
-      type="password"
-      label="Password"
-      v-model="password"
-      :errorMessage="passwordError"
-    />
+    <h1>{{ 'UIInput Component' }}</h1>
+
+    <h2>{{ 'propsuz UIInput' }}</h2>
+    <UIInput></UIInput>
+
+    <h2>{{ 'size prop UIInput' }}</h2>
+    <UIInput id="1" :size="'small'" label="small"> </UIInput>
+    <UIInput id="2" :size="'medium'" label="medium"> </UIInput>
+    <UIInput id="3" :size="'large'" label="large"> </UIInput>
+
+    <h2>{{ 'type prop UIInput' }}</h2>
 
     <div class="header">
       <h2>butonlar</h2>
@@ -58,6 +54,7 @@ export default {
 
 <style lang="scss" scoped>
 .home-view {
+  user-select: none;
   padding-top: 3rem;
   background: white;
 }
