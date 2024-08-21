@@ -61,7 +61,7 @@ export default {
         this.$emit('update:modelValue', (event.target as HTMLInputElement).value)
       }
     },
-    onBlur(event: FocusEvent) {
+    onBlur() {
       this.isFocused = false
     }
   }
