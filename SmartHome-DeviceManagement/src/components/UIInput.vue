@@ -5,7 +5,7 @@
       :class="{ small: size === 'small', medium: size === 'medium', large: size === 'large' }"
     >
       <div class="icon-wrapper">
-        <IconSvg class="icon"></IconSvg>
+        <SvgIcon :name="icon" :size="iconSize" class="icon"></SvgIcon>
       </div>
       <input
         :type="type"
@@ -25,11 +25,12 @@
 </template>
 
 <script lang="ts">
-import IconSvg from '../components/IconSvg.vue'
+import SvgIcon from '../components/IconSvg.vue'
+
 export default {
   name: 'UIInput',
   components: {
-    IconSvg
+    SvgIcon
   },
   props: {
     type: {
@@ -58,7 +59,8 @@ export default {
       validator: (value) => ['small', 'medium', 'large'].includes(String(value))
     },
     icon: {
-      type: String
+      type: String,
+      default: 'search' // Varsayılan ikon
     }
   },
   data() {
@@ -69,6 +71,12 @@ export default {
   computed: {
     inputSize() {
       return `ui-input--${this.size}`
+    },
+    iconSize() {
+      if (this.size === 'small') return 's'
+      if (this.size === 'medium') return 'm'
+      if (this.size === 'large') return 'l'
+      return 'm' // Varsayılan değer
     }
   },
   methods: {
@@ -91,6 +99,7 @@ export default {
   flex-direction: column;
   border-radius: 0.5rem;
   padding: 0.5rem;
+
   .input-wrapper {
     &.small {
       width: 240px;
@@ -113,6 +122,7 @@ export default {
       position: absolute;
       left: 6px;
       top: 12px;
+
       .icon {
         cursor: pointer;
       }
@@ -120,11 +130,11 @@ export default {
 
     .input {
       font-size: 1rem;
-      margin-inline-start: 16px;
+      margin-inline-start: 36px; /* İkona daha fazla alan açmak için */
       outline: none;
       border: none;
       border-radius: 8px;
-      padding: 1rem 1rem 1rem 1rem;
+      padding: 1rem;
       width: 100%;
     }
   }
