@@ -4,20 +4,32 @@
       class="input-wrapper"
       :class="[
         { small: size === 'small', medium: size === 'medium', large: size === 'large' },
-        { 'with-icon': computedIcon, 'without-icon': !computedIcon }
+        { 'with-icon': computedIcon, 'without-icon': !computedIcon },
+        { disabled: disabled }
       ]"
     >
-      <div v-if="computedIcon" class="icon-wrapper">
-        <SvgIcon :name="computedIcon" :size="iconSize" class="icon"></SvgIcon>
+      <div v-if="computedIconRight" class="icon-right-wrapper" :class="{ disabled: disabled }">
+        <IconSvg>
+          :name="computedIconRight" :size="iconSize" class="icon" :class="{ disabled: disabled }"
+        </IconSvg>
+      </div>
+      <div v-if="computedIcon" class="icon-wrapper" :class="{ disabled: disabled }">
+        <IconSvg
+          :name="computedIcon"
+          :size="iconSize"
+          class="icon"
+          :class="{ disabled: disabled }"
+        ></IconSvg>
       </div>
       <input
-        :type="type"
+        :disabled="disabled"
+        :type="inputType"
         :id="id"
         :value="modelValue"
         @input="onInput"
         @focus="isFocused = true"
         @blur="onBlur"
-        :class="['input', inputSize]"
+        :class="['input', inputSize, { disabled: disabled }]"
         required
       />
     </div>
@@ -28,12 +40,12 @@
 </template>
 
 <script lang="ts">
-import SvgIcon from '../components/IconSvg.vue'
+import IconSvg from '../components/IconSvg.vue'
 
 export default {
   name: 'UIInput',
   components: {
-    SvgIcon
+    IconSvg
   },
   props: {
     type: {
@@ -63,6 +75,14 @@ export default {
     },
     icon: {
       type: String
+    },
+    disabled: {
+      type: Boolean,
+      default: false
+    },
+    iconRight: {
+      type: String,
+      default: ''
     }
   },
   data() {
@@ -77,6 +97,10 @@ export default {
       if (this.icon) return this.icon.trim() ? this.icon : 'search'
       return ''
     },
+    computedIconRight() {
+      if (this.iconRight) return this.iconRight.trim() ? this.iconRight : ''
+      return ''
+    },
     inputSize() {
       return `ui-input--${this.size}`
     },
@@ -86,10 +110,8 @@ export default {
       if (this.size === 'large') return 'l'
       return 'm'
     },
-    iconPosition() {
-      const baseTop = 8
-      const iconHeight = this.size === 'small' ? 2 : this.size === 'medium' ? 14 : 24
-      return `${baseTop - iconHeight / 2}px`
+    inputType() {
+      return this.type === 'password' ? 'text' : this.type
     }
   },
   methods: {
@@ -110,6 +132,21 @@ export default {
   flex-direction: column;
   border-radius: 0.5rem;
   padding: 0.5rem;
+
+  .icon-right-wrapper {
+    display: flex;
+    position: absolute;
+    right: 2px;
+    top: 50%;
+    transform: translateY(-50%);
+    .icon {
+      cursor: pointer;
+      &.disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
+    }
+  }
 
   .input-wrapper {
     cursor: pointer;
@@ -132,6 +169,7 @@ export default {
         font-size: 1.2rem;
       }
     }
+
     display: flex;
     align-items: center;
     position: relative;
@@ -147,14 +185,32 @@ export default {
       margin-inline-start: 0;
     }
 
+    &.disabled {
+      background-color: #f1f1f1;
+      color: #666;
+      cursor: not-allowed;
+      box-shadow: none;
+      border-color: #ddd;
+    }
+
     .icon-wrapper {
       display: flex;
       position: absolute;
       left: 2px;
-      top: v-bind(iconPosition);
+      top: 50%;
+      transform: translateY(-50%);
+      &.disabled .icon {
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
 
       .icon {
         cursor: pointer;
+
+        &.disabled {
+          opacity: 0.5;
+          cursor: not-allowed;
+        }
       }
     }
 
@@ -166,6 +222,12 @@ export default {
       border-radius: 8px;
       padding: 1rem;
       width: 100%;
+
+      &.disabled {
+        background-color: #f1f1f1;
+        color: #666;
+        cursor: not-allowed;
+      }
     }
   }
 }

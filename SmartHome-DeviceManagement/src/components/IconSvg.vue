@@ -37,6 +37,8 @@ export default {
 
 <style lang="scss" scoped>
 .icon-svg-c {
+  user-select: none;
+  cursor: pointer;
   padding: 0.5rem;
   border-radius: 0.5rem;
   display: inline-flex;
@@ -61,8 +63,8 @@ export default {
   }
 
   img {
-    width: 100%; /* Konteyner boyutuna tam uyması için */
-    height: 100%; /* Konteyner boyutuna tam uyması için */
+    width: 100%;
+    height: 100%;
     display: block;
   }
 }
