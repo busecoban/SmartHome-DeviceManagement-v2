@@ -2,9 +2,12 @@
   <div class="ui-input-c">
     <div
       class="input-wrapper"
-      :class="{ small: size === 'small', medium: size === 'medium', large: size === 'large' }"
+      :class="[
+        { small: size === 'small', medium: size === 'medium', large: size === 'large' },
+        { 'with-icon': computedIcon, 'without-icon': !computedIcon }
+      ]"
     >
-      <div class="icon-wrapper">
+      <div v-if="computedIcon" class="icon-wrapper">
         <SvgIcon :name="computedIcon" :size="iconSize" class="icon"></SvgIcon>
       </div>
       <input
@@ -23,6 +26,7 @@
     <p v-if="errorMessage" class="ui-input-error">{{ errorMessage }}</p>
   </div>
 </template>
+
 <script lang="ts">
 import SvgIcon from '../components/IconSvg.vue'
 
@@ -58,8 +62,7 @@ export default {
       validator: (value) => ['small', 'medium', 'large'].includes(String(value))
     },
     icon: {
-      type: String,
-      default: 'search' // Varsayılan ikon
+      type: String
     }
   },
   data() {
@@ -71,7 +74,8 @@ export default {
     computedIcon() {
       if (this.type === 'email') return 'mail'
       if (this.type === 'password') return 'lock'
-      return this.icon
+      if (this.icon) return this.icon.trim() ? this.icon : 'search'
+      return ''
     },
     inputSize() {
       return `ui-input--${this.size}`
@@ -80,10 +84,10 @@ export default {
       if (this.size === 'small') return 's'
       if (this.size === 'medium') return 'm'
       if (this.size === 'large') return 'l'
-      return 'm' // Varsayılan değer
+      return 'm'
     },
     iconPosition() {
-      const baseTop = 8 // Orta noktayı bulmak için temel üst değeri
+      const baseTop = 8
       const iconHeight = this.size === 'small' ? 2 : this.size === 'medium' ? 14 : 24
       return `${baseTop - iconHeight / 2}px`
     }
@@ -112,12 +116,21 @@ export default {
     height: 3rem;
     &.small {
       width: 240px;
+      .input {
+        font-size: 0.8rem;
+      }
     }
     &.medium {
       width: 320px;
+      .input {
+        font-size: 1rem;
+      }
     }
     &.large {
       width: 400px;
+      .input {
+        font-size: 1.2rem;
+      }
     }
     display: flex;
     align-items: center;
@@ -125,6 +138,14 @@ export default {
     border: 1px solid #666;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+
+    &.with-icon .input {
+      margin-inline-start: 24px;
+    }
+
+    &.without-icon .input {
+      margin-inline-start: 0;
+    }
 
     .icon-wrapper {
       display: flex;
@@ -140,7 +161,6 @@ export default {
     .input {
       height: 2rem;
       font-size: 0.8rem;
-      margin-inline-start: 24px; /* İkona daha fazla alan açmak için */
       outline: none;
       border: none;
       border-radius: 8px;
