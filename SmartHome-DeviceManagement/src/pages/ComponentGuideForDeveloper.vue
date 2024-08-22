@@ -18,7 +18,8 @@
     <UIInput id="3" :size="'large'" label="large"> </UIInput>
 
     <h2>{{ 'type prop UIInput' }}</h2>
-    <UIInput id="1" :size="'small'" label="small" icon="lock"> </UIInput>
+    <UIInput id="4" :size="'small'" label="small" :type="'email'"> </UIInput>
+    <UIInput id="5" :size="'small'" label="small" :type="'password'"> </UIInput>
 
     <div class="header">
       <h2>butonlar</h2>

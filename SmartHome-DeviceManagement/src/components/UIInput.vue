@@ -5,7 +5,7 @@
       :class="{ small: size === 'small', medium: size === 'medium', large: size === 'large' }"
     >
       <div class="icon-wrapper">
-        <SvgIcon :name="icon" :size="iconSize" class="icon"></SvgIcon>
+        <SvgIcon :name="computedIcon" :size="iconSize" class="icon"></SvgIcon>
       </div>
       <input
         :type="type"
@@ -23,7 +23,6 @@
     <p v-if="errorMessage" class="ui-input-error">{{ errorMessage }}</p>
   </div>
 </template>
-
 <script lang="ts">
 import SvgIcon from '../components/IconSvg.vue'
 
@@ -69,6 +68,11 @@ export default {
     }
   },
   computed: {
+    computedIcon() {
+      if (this.type === 'email') return 'mail'
+      if (this.type === 'password') return 'lock'
+      return this.icon
+    },
     inputSize() {
       return `ui-input--${this.size}`
     },
@@ -77,13 +81,16 @@ export default {
       if (this.size === 'medium') return 'm'
       if (this.size === 'large') return 'l'
       return 'm' // Varsayılan değer
+    },
+    iconPosition() {
+      const baseTop = 8 // Orta noktayı bulmak için temel üst değeri
+      const iconHeight = this.size === 'small' ? 2 : this.size === 'medium' ? 14 : 24
+      return `${baseTop - iconHeight / 2}px`
     }
   },
   methods: {
     onInput(event: InputEvent) {
-      if (event.target) {
-        this.$emit('update:modelValue', (event.target as HTMLInputElement).value)
-      }
+      this.$emit('update:modelValue', (event.target as HTMLInputElement).value)
     },
     onBlur() {
       this.isFocused = false
@@ -101,6 +108,8 @@ export default {
   padding: 0.5rem;
 
   .input-wrapper {
+    cursor: pointer;
+    height: 3rem;
     &.small {
       width: 240px;
     }
@@ -120,8 +129,8 @@ export default {
     .icon-wrapper {
       display: flex;
       position: absolute;
-      left: 6px;
-      top: 12px;
+      left: 2px;
+      top: v-bind(iconPosition);
 
       .icon {
         cursor: pointer;
@@ -129,8 +138,9 @@ export default {
     }
 
     .input {
-      font-size: 1rem;
-      margin-inline-start: 36px; /* İkona daha fazla alan açmak için */
+      height: 2rem;
+      font-size: 0.8rem;
+      margin-inline-start: 24px; /* İkona daha fazla alan açmak için */
       outline: none;
       border: none;
       border-radius: 8px;

@@ -44,16 +44,16 @@ export default {
   justify-content: center;
 
   &.icon-size-s {
-    width: 22px;
-    height: 22px;
+    width: 32px;
+    height: 32px;
   }
   &.icon-size-m {
-    width: 28px;
-    height: 28px;
+    width: 42px;
+    height: 42px;
   }
   &.icon-size-l {
-    width: 36px;
-    height: 36px;
+    width: 50px;
+    height: 50px;
   }
   &.icon-size-Xl {
     width: 90px;
