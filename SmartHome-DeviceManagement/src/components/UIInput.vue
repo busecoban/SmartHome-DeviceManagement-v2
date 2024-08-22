@@ -1,23 +1,36 @@
 <template>
   <div class="ui-input-c">
-    <input
-      :type="type"
-      :id="id"
-      :value="modelValue"
-      :class="['input', inputSize]"
-      @input="onInput"
-      @focus="isFocused = true"
-      @blur="onBlur"
-      required
-    />
+    <div
+      class="input-wrapper"
+      :class="{ small: size === 'small', medium: size === 'medium', large: size === 'large' }"
+    >
+      <div class="icon-wrapper">
+        <IconSvg class="icon"></IconSvg>
+      </div>
+      <input
+        :type="type"
+        :id="id"
+        :value="modelValue"
+        @input="onInput"
+        @focus="isFocused = true"
+        @blur="onBlur"
+        :class="['input', inputSize]"
+        required
+      />
+    </div>
+
     <label :for="id" class="user-label">{{ label }}</label>
     <p v-if="errorMessage" class="ui-input-error">{{ errorMessage }}</p>
   </div>
 </template>
 
 <script lang="ts">
+import IconSvg from '../components/IconSvg.vue'
 export default {
   name: 'UIInput',
+  components: {
+    IconSvg
+  },
   props: {
     type: {
       type: String,
@@ -43,6 +56,9 @@ export default {
       type: String,
       default: 'small',
       validator: (value) => ['small', 'medium', 'large'].includes(String(value))
+    },
+    icon: {
+      type: String
     }
   },
   data() {
@@ -68,63 +84,49 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .ui-input-c {
-  position: relative;
-  margin-bottom: 0.8rem;
-}
+  user-select: none;
+  display: flex;
+  flex-direction: column;
+  border-radius: 0.5rem;
+  padding: 0.5rem;
+  .input-wrapper {
+    &.small {
+      width: 240px;
+    }
+    &.medium {
+      width: 320px;
+    }
+    &.large {
+      width: 400px;
+    }
+    display: flex;
+    align-items: center;
+    position: relative;
+    border: 1px solid #666;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
 
-.input {
-  border: solid 1.5px #9e9e9e;
-  border-radius: 1rem;
-  background: none;
-  padding: 1rem;
-  font-size: 1rem;
-  color: black;
-  transition: border 150ms cubic-bezier(0.4, 0, 0.2, 1);
-  width: 100%;
-}
+    .icon-wrapper {
+      display: flex;
+      position: absolute;
+      left: 6px;
+      top: 12px;
+      .icon {
+        cursor: pointer;
+      }
+    }
 
-.ui-input--small {
-  padding: 0.5rem 1rem;
-  font-size: 0.8rem;
-  width: 16rem;
-}
-
-.ui-input--medium {
-  padding: 0.5rem 1rem;
-  font-size: 0.8rem;
-  width: 18rem;
-}
-
-.ui-input--large {
-  padding: 0.5rem 1rem;
-  font-size: 0.8rem;
-  width: 20rem;
-}
-
-.input:focus,
-.input:valid {
-  outline: none;
-  border: 1.5px solid #1a73e8;
-}
-
-.user-label {
-  position: absolute;
-  left: 1rem;
-  top: 50%;
-  transform: translateY(-50%);
-  color: grey;
-  pointer-events: none;
-  transition: 150ms cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.input:focus ~ .user-label,
-.input:valid ~ .user-label {
-  top: -0.2rem; /* Label'ın tam olarak yukarı çıkmasını sağlar */
-  transform: translateY(-50%) scale(0.8); /* Yukarı çıkarken küçültür */
-  background: white;
-  padding: 0 0.2rem; /* Label etrafında boşluk bırakır */
-  color: #2196f3;
+    .input {
+      font-size: 1rem;
+      margin-inline-start: 16px;
+      outline: none;
+      border: none;
+      border-radius: 8px;
+      padding: 1rem 1rem 1rem 1rem;
+      width: 100%;
+    }
+  }
 }
 </style>
