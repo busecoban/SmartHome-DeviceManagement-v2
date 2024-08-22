@@ -10,7 +10,8 @@ export default {
   props: {
     name: {
       type: String,
-      required: true
+      required: true,
+      default: 'search'
     },
     size: {
       type: String,
@@ -36,6 +37,8 @@ export default {
 
 <style lang="scss" scoped>
 .icon-svg-c {
+  user-select: none;
+  cursor: pointer;
   padding: 0.5rem;
   border-radius: 0.5rem;
   display: inline-flex;
@@ -43,16 +46,16 @@ export default {
   justify-content: center;
 
   &.icon-size-s {
-    width: 22px;
-    height: 22px;
+    width: 32px;
+    height: 32px;
   }
   &.icon-size-m {
-    width: 28px;
-    height: 28px;
+    width: 42px;
+    height: 42px;
   }
   &.icon-size-l {
-    width: 36px;
-    height: 36px;
+    width: 50px;
+    height: 50px;
   }
   &.icon-size-Xl {
     width: 90px;
@@ -60,8 +63,8 @@ export default {
   }
 
   img {
-    width: 100%; /* Konteyner boyutuna tam uyması için */
-    height: 100%; /* Konteyner boyutuna tam uyması için */
+    width: 100%;
+    height: 100%;
     display: block;
   }
 }
