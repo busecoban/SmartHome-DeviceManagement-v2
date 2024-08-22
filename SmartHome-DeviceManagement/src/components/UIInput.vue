@@ -7,6 +7,7 @@
         { 'with-icon': computedIcon, 'without-icon': !computedIcon },
         { disabled: disabled }
       ]"
+      :style="{ borderColor: borderColor }"
     >
       <div v-if="computedIconRight" class="icon-right-wrapper" :class="{ disabled: disabled }">
         <IconSvg>
@@ -83,6 +84,10 @@ export default {
     iconRight: {
       type: String,
       default: ''
+    },
+    color: {
+      type: String,
+      default: ''
     }
   },
   data() {
@@ -112,6 +117,9 @@ export default {
     },
     inputType() {
       return this.type === 'password' ? 'text' : this.type
+    },
+    borderColor() {
+      return this.color
     }
   },
   methods: {

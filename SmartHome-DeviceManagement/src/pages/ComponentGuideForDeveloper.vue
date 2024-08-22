@@ -48,6 +48,12 @@
 
     <h2>{{ 'iconRight prop UIInput' }}</h2>
     <UIInput :iconRight="'search'"> </UIInput>
+    <UIInput :iconRight="'search'" :size="'small'"> </UIInput>
+    <UIInput :iconRight="'search'" :size="'medium'"> </UIInput>
+    <UIInput :iconRight="'search'" :size="'large'"> </UIInput>
+
+    <h2>{{ 'color prop UIInput' }}</h2>
+    <UIInput :color="'red'"> </UIInput>
 
     <div class="header">
       <h2>butonlar</h2>
