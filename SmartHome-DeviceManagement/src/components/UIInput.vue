@@ -10,9 +10,12 @@
       :style="{ borderColor: borderColor }"
     >
       <div v-if="computedIconRight" class="icon-right-wrapper" :class="{ disabled: disabled }">
-        <IconSvg>
-          :name="computedIconRight" :size="iconSize" class="icon" :class="{ disabled: disabled }"
-        </IconSvg>
+        <IconSvg
+          :name="computedIconRight"
+          :size="iconSize"
+          class="icon"
+          :class="{ disabled: disabled }"
+        />
       </div>
       <div v-if="computedIcon" class="icon-wrapper" :class="{ disabled: disabled }">
         <IconSvg
@@ -20,8 +23,9 @@
           :size="iconSize"
           class="icon"
           :class="{ disabled: disabled }"
-        ></IconSvg>
+        />
       </div>
+
       <input
         :disabled="disabled"
         :type="inputType"
@@ -32,10 +36,11 @@
         @blur="onBlur"
         :class="['input', inputSize, { disabled: disabled }]"
         required
+        placeholder=" "
       />
+      <label :for="id" class="user-label">{{ label }}</label>
     </div>
 
-    <label :for="id" class="user-label">{{ label }}</label>
     <p v-if="errorMessage" class="ui-input-error">{{ errorMessage }}</p>
   </div>
 </template>
@@ -144,7 +149,7 @@ export default {
   .icon-right-wrapper {
     display: flex;
     position: absolute;
-    right: 2px;
+    right: 8px; /* İkon için sağa yer açmak */
     top: 50%;
     transform: translateY(-50%);
     .icon {
@@ -181,16 +186,22 @@ export default {
     display: flex;
     align-items: center;
     position: relative;
-    border: 1px solid #666;
+    border: 1.5px solid #666;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+    transition: border-color 150ms ease-in-out;
 
     &.with-icon .input {
-      margin-inline-start: 24px;
+      padding-left: 3rem; /* İkon için solda daha fazla yer açmak */
+    }
+
+    &.with-icon-right .input {
+      padding-right: 3rem; /* Sağda ikon varsa sağda yer açmak */
     }
 
     &.without-icon .input {
-      margin-inline-start: 0;
+      padding-left: 1rem;
+      padding-right: 1rem;
     }
 
     &.disabled {
@@ -204,7 +215,7 @@ export default {
     .icon-wrapper {
       display: flex;
       position: absolute;
-      left: 2px;
+      left: 8px; /* İkon için solda yer açmak */
       top: 50%;
       transform: translateY(-50%);
       &.disabled .icon {
@@ -230,6 +241,7 @@ export default {
       border-radius: 8px;
       padding: 1rem;
       width: 100%;
+      background: transparent;
 
       &.disabled {
         background-color: #f1f1f1;
@@ -237,6 +249,40 @@ export default {
         cursor: not-allowed;
       }
     }
+
+    .user-label {
+      position: absolute;
+      bottom: 24px;
+      left: 1rem;
+      transform: translateY(1rem);
+      transition: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+      background-color: transparent;
+      padding: 0 0.2em;
+      color: gray;
+      pointer-events: none;
+
+      /* Eğer ikon varsa, label'ı biraz sağa kaydır */
+      .with-icon & {
+        left: 2.5rem;
+      }
+    }
+
+    &:focus-within {
+      border-color: #1a73e8;
+    }
+
+    .input:focus ~ .user-label,
+    .input:not(:placeholder-shown) ~ .user-label {
+      transform: translateY(-0.7rem) scale(0.75);
+      padding: 0 0.2em;
+      color: #2196f3;
+      background: white;
+    }
+  }
+
+  .ui-input-error {
+    color: #ff0000;
+    font-size: 0.8rem;
   }
 }
 </style>
