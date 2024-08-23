@@ -290,7 +290,7 @@ export default {
 
     .input:focus ~ .user-label,
     .input:not(:placeholder-shown) ~ .user-label {
-      transform: translateY(-0.75rem) scale(0.75);
+      transform: translateY(-0.1rem) scale(0.75);
       color: #2196f3;
       background: white;
     }
@@ -301,8 +301,9 @@ export default {
     }
 
     .input:focus ~ .user-label.with-icon-right,
-    .input:not(:placeholder-shown) ~ .user-label.with-icon-right {
-      transform: translateY(-0.75rem) translateX(-0.5rem) scale(0.75);
+    .input:not(:placeholder-shown) ~ .user-label.with-icon-rixght {
+      left: 0rem; /* Adjust the left positioning */
+      transform: translateY(-0.9rem) translateX(0) scale(0.75);
     }
 
     .input:focus ~ .user-label:not(.with-icon):not(.with-icon-right),
