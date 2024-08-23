@@ -2,7 +2,7 @@
   <div :class="['ui-navbar-c', navbarClass]">
     <div class="ui-navbar">
       <div class="ui-navbar-logo">
-        <IconSvg name="BIMO2" :size="'Xl'" />
+        <IconSvg name="BIMO2" :size="'l'" />
       </div>
 
       <div class="ui-navbar-links">
