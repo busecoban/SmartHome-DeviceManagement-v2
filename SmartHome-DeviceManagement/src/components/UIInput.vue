@@ -15,6 +15,7 @@
           :size="iconSize"
           class="icon"
           :class="{ disabled: disabled }"
+          @click="toggleVisibility"
         />
       </div>
       <div v-if="computedIcon" class="icon-wrapper" :class="{ disabled: disabled }">
@@ -102,7 +103,8 @@ export default {
   },
   data() {
     return {
-      isFocused: false
+      isFocused: false,
+      isPasswordVisible: false
     }
   },
   computed: {
@@ -113,8 +115,15 @@ export default {
       return ''
     },
     computedIconRight() {
-      if (this.iconRight) return this.iconRight.trim() ? this.iconRight : ''
-      return ''
+      if (this.type === 'password') {
+        // Şifre türü için göz ikonunu döndür
+        return this.isPasswordVisible ? 'eye-close' : 'eye-open'
+      }
+      // Diğer türler için `iconRight` prop'unu kullan
+      return this.iconRight.trim() ? this.iconRight : ''
+    },
+    inputType() {
+      return this.type === 'password' ? (this.isPasswordVisible ? 'password' : 'text') : this.type
     },
     inputSize() {
       return `ui-input--${this.size}`
@@ -125,9 +134,7 @@ export default {
       if (this.size === 'large') return 'l'
       return 'm'
     },
-    inputType() {
-      return this.type === 'password' ? 'text' : this.type
-    },
+
     borderColor() {
       return this.color
     }
@@ -138,6 +145,11 @@ export default {
     },
     onBlur() {
       this.isFocused = false
+    },
+    toggleVisibility() {
+      if (this.type === 'password') {
+        this.isPasswordVisible = !this.isPasswordVisible
+      }
     }
   }
 }
@@ -152,6 +164,11 @@ export default {
   padding: 0.5rem;
 
   .input-wrapper {
+    &.disabled {
+      background-color: #f1f1f1;
+      color: #666;
+      cursor: not-allowed;
+    }
     cursor: pointer;
     height: 3rem;
     display: flex;
@@ -235,6 +252,9 @@ export default {
     }
 
     .input {
+      &.disabled {
+        cursor: not-allowed;
+      }
       height: 2rem;
       font-size: 0.8rem;
       outline: none;
@@ -243,12 +263,6 @@ export default {
       padding: 1rem;
       width: 100%;
       background: transparent;
-
-      &.disabled {
-        background-color: #f1f1f1;
-        color: #666;
-        cursor: not-allowed;
-      }
     }
 
     .user-label {
