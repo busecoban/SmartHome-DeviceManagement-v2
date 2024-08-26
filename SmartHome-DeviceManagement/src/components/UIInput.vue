@@ -4,7 +4,7 @@
       class="input-wrapper"
       :class="[
         { small: size === 'small', medium: size === 'medium', large: size === 'large' },
-        { 'with-icon': computedIcon, 'without-icon': !computedIcon },
+        { 'with-icon': computedIcon, 'with-icon-right': computedIconRight },
         { disabled: disabled }
       ]"
       :style="{ borderColor: borderColor }"
@@ -15,6 +15,7 @@
           :size="iconSize"
           class="icon"
           :class="{ disabled: disabled }"
+          @click="toggleVisibility"
         />
       </div>
       <div v-if="computedIcon" class="icon-wrapper" :class="{ disabled: disabled }">
@@ -38,7 +39,12 @@
         required
         placeholder=" "
       />
-      <label :for="id" class="user-label">{{ label }}</label>
+      <label
+        :for="id"
+        class="user-label"
+        :class="{ 'with-icon': computedIcon, 'with-icon-right': computedIconRight }"
+        >{{ label }}</label
+      >
     </div>
 
     <p v-if="errorMessage" class="ui-input-error">{{ errorMessage }}</p>
@@ -97,7 +103,8 @@ export default {
   },
   data() {
     return {
-      isFocused: false
+      isFocused: false,
+      isPasswordVisible: false
     }
   },
   computed: {
@@ -108,8 +115,15 @@ export default {
       return ''
     },
     computedIconRight() {
-      if (this.iconRight) return this.iconRight.trim() ? this.iconRight : ''
-      return ''
+      if (this.type === 'password') {
+        // Şifre türü için göz ikonunu döndür
+        return this.isPasswordVisible ? 'eye-close' : 'eye-open'
+      }
+      // Diğer türler için `iconRight` prop'unu kullan
+      return this.iconRight.trim() ? this.iconRight : ''
+    },
+    inputType() {
+      return this.type === 'password' ? (this.isPasswordVisible ? 'password' : 'text') : this.type
     },
     inputSize() {
       return `ui-input--${this.size}`
@@ -120,9 +134,7 @@ export default {
       if (this.size === 'large') return 'l'
       return 'm'
     },
-    inputType() {
-      return this.type === 'password' ? 'text' : this.type
-    },
+
     borderColor() {
       return this.color
     }
@@ -133,6 +145,11 @@ export default {
     },
     onBlur() {
       this.isFocused = false
+    },
+    toggleVisibility() {
+      if (this.type === 'password') {
+        this.isPasswordVisible = !this.isPasswordVisible
+      }
     }
   }
 }
@@ -146,24 +163,22 @@ export default {
   border-radius: 0.5rem;
   padding: 0.5rem;
 
-  .icon-right-wrapper {
-    display: flex;
-    position: absolute;
-    right: 8px; /* İkon için sağa yer açmak */
-    top: 50%;
-    transform: translateY(-50%);
-    .icon {
-      cursor: pointer;
-      &.disabled {
-        opacity: 0.5;
-        cursor: not-allowed;
-      }
-    }
-  }
-
   .input-wrapper {
+    &.disabled {
+      background-color: #f1f1f1;
+      color: #666;
+      cursor: not-allowed;
+    }
     cursor: pointer;
     height: 3rem;
+    display: flex;
+    align-items: center;
+    position: relative;
+    border: 1.5px solid #666;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+    transition: border-color 150ms ease-in-out;
+
     &.small {
       width: 240px;
       .input {
@@ -183,49 +198,52 @@ export default {
       }
     }
 
-    display: flex;
-    align-items: center;
-    position: relative;
-    border: 1.5px solid #666;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
-    transition: border-color 150ms ease-in-out;
-
     &.with-icon .input {
-      padding-left: 3rem; /* İkon için solda daha fazla yer açmak */
+      padding-left: 2.5rem;
+    }
+
+    &.with-icon .user-label {
+      left: 2.5rem;
     }
 
     &.with-icon-right .input {
-      padding-right: 3rem; /* Sağda ikon varsa sağda yer açmak */
+      padding-right: 2.5rem;
+    }
+
+    &.with-icon.with-icon-right .input {
+      padding-left: 2.5rem;
+      padding-right: 2.5rem;
     }
 
     &.without-icon .input {
-      padding-left: 1rem;
-      padding-right: 1rem;
+      padding-left: 0.5rem;
+      padding-right: 0.5rem;
     }
 
-    &.disabled {
-      background-color: #f1f1f1;
-      color: #666;
-      cursor: not-allowed;
-      box-shadow: none;
-      border-color: #ddd;
+    &:focus-within {
+      border-color: #1a73e8;
     }
 
     .icon-wrapper {
       display: flex;
       position: absolute;
-      left: 8px; /* İkon için solda yer açmak */
+      left: 0px;
       top: 50%;
       transform: translateY(-50%);
       &.disabled .icon {
         opacity: 0.5;
         cursor: not-allowed;
       }
+    }
 
+    .icon-right-wrapper {
+      display: flex;
+      position: absolute;
+      right: 0px;
+      top: 50%;
+      transform: translateY(-50%);
       .icon {
         cursor: pointer;
-
         &.disabled {
           opacity: 0.5;
           cursor: not-allowed;
@@ -234,6 +252,9 @@ export default {
     }
 
     .input {
+      &.disabled {
+        cursor: not-allowed;
+      }
       height: 2rem;
       font-size: 0.8rem;
       outline: none;
@@ -242,18 +263,11 @@ export default {
       padding: 1rem;
       width: 100%;
       background: transparent;
-
-      &.disabled {
-        background-color: #f1f1f1;
-        color: #666;
-        cursor: not-allowed;
-      }
     }
 
     .user-label {
       position: absolute;
       bottom: 24px;
-      left: 1rem;
       transform: translateY(1rem);
       transition: 150ms cubic-bezier(0.4, 0, 0.2, 1);
       background-color: transparent;
@@ -261,22 +275,40 @@ export default {
       color: gray;
       pointer-events: none;
 
-      /* Eğer ikon varsa, label'ı biraz sağa kaydır */
-      .with-icon & {
+      /* Default position for the label */
+      left: 0.5rem;
+
+      /* Adjust label position based on icon presence */
+      &.with-icon {
         left: 2.5rem;
       }
-    }
 
-    &:focus-within {
-      border-color: #1a73e8;
+      &.with-icon-right {
+        right: 2.5rem;
+      }
     }
 
     .input:focus ~ .user-label,
     .input:not(:placeholder-shown) ~ .user-label {
-      transform: translateY(-0.7rem) scale(0.75);
-      padding: 0 0.2em;
+      transform: translateY(-0.1rem) scale(0.75);
       color: #2196f3;
       background: white;
+    }
+
+    .input:focus ~ .user-label.with-icon,
+    .input:not(:placeholder-shown) ~ .user-label.with-icon {
+      transform: translateY(-0.75rem) translateX(-1.5rem) scale(0.75);
+    }
+
+    .input:focus ~ .user-label.with-icon-right,
+    .input:not(:placeholder-shown) ~ .user-label.with-icon-rixght {
+      left: 0rem; /* Adjust the left positioning */
+      transform: translateY(-0.9rem) translateX(0) scale(0.75);
+    }
+
+    .input:focus ~ .user-label:not(.with-icon):not(.with-icon-right),
+    .input:not(:placeholder-shown) ~ .user-label:not(.with-icon):not(.with-icon-right) {
+      transform: translateY(-0.75rem) translateX(-1rem) scale(0.75);
     }
   }
 
