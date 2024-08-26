@@ -3,6 +3,9 @@
     <UINavBar> </UINavBar>
     <UIFooter></UIFooter>
 
+    <!-- Section: UIForm Component Examples -->
+    <UIForm></UIForm>
+
     <!-- Section 1: UIInput Component Examples -->
     <section class="input-section">
       <h1>UIInput Component Examples</h1>
@@ -177,6 +180,7 @@ import UIFooter from '../components/UIFooter.vue'
 import UIButton from '../components/UIButton.vue'
 import UIInput from '../components/UIInput.vue'
 import IconSvg from '../components/IconSvg.vue'
+import UIForm from '../components/UIForm.vue'
 
 export default {
   name: 'HomeView',
@@ -185,7 +189,8 @@ export default {
     UIFooter,
     UIButton,
     UIInput,
-    IconSvg
+    IconSvg,
+    UIForm
   }
 }
 </script>
